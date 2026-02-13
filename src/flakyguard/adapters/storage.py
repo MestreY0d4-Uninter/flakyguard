@@ -99,6 +99,7 @@ class SQLiteStorage:
 
         if not rows:
             return None
+
         results = []
         for outcome_str, duration, timestamp_str, env_info_json in reversed(rows):
             env_data = json.loads(env_info_json)

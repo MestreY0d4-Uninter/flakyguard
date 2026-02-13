@@ -1,0 +1,19 @@
+from typing import Protocol
+
+from flakyguard.core.models import FlakyTest, TestHistory, TestResult
+
+
+class StoragePort(Protocol):
+    def save_result(self, result: TestResult) -> None: ...
+
+    def get_history(self, test_id: str, window_size: int) -> TestHistory | None: ...
+
+    def get_all_histories(self, window_size: int) -> list[TestHistory]: ...
+
+    def clear(self) -> None: ...
+
+    def close(self) -> None: ...
+
+
+class ReporterPort(Protocol):
+    def report(self, flaky_tests: list[FlakyTest]) -> None: ...
